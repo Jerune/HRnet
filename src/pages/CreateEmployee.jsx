@@ -1,5 +1,7 @@
+// @ts-nocheck
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
+import Modal from '../components/Modal'
 import getCurrentDay from '../utils/getCurrentDay'
 import getSelectOptions from '../utils/getSelectOptions'
 
@@ -92,11 +94,10 @@ const addressFields = ['street', 'city', 'state', 'zipCode']
 const CreateEmployee = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState(emptyForm)
+  const [modalIsActive, setModalIsActive] = useState(false)
 
   function handleChange(event) {
     const isAddressField = addressFields.includes(event.target.name)
-
-    // @ts-ignore
     setFormData((prevFormData) => {
       if (!isAddressField) {
         return {
@@ -115,12 +116,17 @@ const CreateEmployee = () => {
     })
   }
 
-  console.log(formData)
+  function handleSubmit(event) {
+    event.preventDefault()
+    console.log(formData)
+    setModalIsActive(true)
+    setTimeout(() => navigate('/employee-list'), 3000)
+  }
 
   return (
     <main className="main">
       <h2>Create Employee</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="firstName">First Name</label>
         <input
           type="text"
@@ -151,6 +157,7 @@ const CreateEmployee = () => {
           placeholder="dd/mm/yyyy"
           min={getCurrentDay().min}
           max={getCurrentDay().max}
+          pattern="\d{1,2}/\d{1,2}/\d{4}"
           required
         />
 
@@ -163,10 +170,11 @@ const CreateEmployee = () => {
           value={formData.startDate}
           placeholder="dd/mm/yyyy"
           min={getCurrentDay().max}
+          pattern="\d{1,2}/\d{1,2}/\d{4}"
           required
         />
 
-        <fieldset className="address">
+        <fieldset className="address-section">
           <legend>Address</legend>
 
           <label htmlFor="street">Street</label>
@@ -223,12 +231,9 @@ const CreateEmployee = () => {
           <option value="">-- Select Dept.--</option>
           {getSelectOptions(departments)}
         </select>
+        <button type="submit">Save</button>
       </form>
-
-      <button type="submit">Save</button>
-      <div id="confirmation" className="modal">
-        Employee Created!
-      </div>
+      {modalIsActive && <Modal />}
     </main>
   )
 }
