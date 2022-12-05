@@ -2,6 +2,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import Modal from '../components/Modal'
+import departments from '../data/departments'
+import states from '../data/states'
 import getCurrentDay from '../utils/getCurrentDay'
 import getSelectOptions from '../utils/getSelectOptions'
 
@@ -10,86 +12,12 @@ const emptyForm = {
   lastName: '',
   dateOfBirth: '',
   startDate: '',
-  address: {
-    street: '',
-    city: '',
-    state: '',
-    zipCode: '',
-  },
   department: '',
+  street: '',
+  city: '',
+  state: '',
+  zipCode: '',
 }
-
-const departments = [
-  'Sales',
-  'Marketing',
-  'Engineering',
-  'Human Resources',
-  'Legal',
-]
-
-const states = [
-  'Alabama',
-  'Alaska',
-  'American Samoa',
-  'Arizona',
-  'Arkansas',
-  'California',
-  'Colorado',
-  'Connecticut',
-  'Delaware',
-  'District of Columbia',
-  'Federated States of Micronesia',
-  'Florida',
-  'Georgia',
-  'Guam',
-  'Hawaii',
-  'Idaho',
-  'Illinois',
-  'Indiana',
-  'Iowa',
-  'Kansas',
-  'Kentucky',
-  'Louisiana',
-  'Maine',
-  'Marshall Islands',
-  'Maryland',
-  'Massachusetts',
-  'Michigan',
-  'Minnesota',
-  'Mississippi',
-  'Missouri',
-  'Montana',
-  'Nebraska',
-  'Nevada',
-  'New Hampshire',
-  'New Jersey',
-  'New Mexico',
-  'New York',
-  'North Carolina',
-  'North Dakota',
-  'Northern Mariana Islands',
-  'Ohio',
-  'Oklahoma',
-  'Oregon',
-  'Palau',
-  'Pennsylvania',
-  'Puerto Rico',
-  'Rhode Island',
-  'South Carolina',
-  'South Dakota',
-  'Tennessee',
-  'Texas',
-  'Utah',
-  'Vermont',
-  'Virgin Island',
-  'Virginia',
-  'Washington',
-  'West Virginia',
-  'Wisconsin',
-  'Wyoming',
-]
-
-const addressFields = ['street', 'city', 'state', 'zipCode']
 
 const CreateEmployee = () => {
   const navigate = useNavigate()
@@ -97,21 +25,10 @@ const CreateEmployee = () => {
   const [modalIsActive, setModalIsActive] = useState(false)
 
   function handleChange(event) {
-    const isAddressField = addressFields.includes(event.target.name)
     setFormData((prevFormData) => {
-      if (!isAddressField) {
-        return {
-          ...prevFormData,
-          [event.target.name]: event.target.value,
-        }
-      } else if (isAddressField) {
-        return {
-          ...prevFormData,
-          address: {
-            ...prevFormData.address,
-            [event.target.name]: event.target.value,
-          },
-        }
+      return {
+        ...prevFormData,
+        [event.target.name]: event.target.value,
       }
     })
   }
@@ -183,7 +100,7 @@ const CreateEmployee = () => {
             id="street"
             name="street"
             onChange={handleChange}
-            value={formData.address.street}
+            value={formData.street}
             required
           />
 
@@ -193,7 +110,7 @@ const CreateEmployee = () => {
             id="city"
             name="city"
             onChange={handleChange}
-            value={formData.address.city}
+            value={formData.city}
             required
           />
 
@@ -202,7 +119,7 @@ const CreateEmployee = () => {
             name="state"
             id="state"
             onChange={handleChange}
-            value={formData.address.state}
+            value={formData.state}
             required
           >
             <option value="">-- Select State --</option>
@@ -215,7 +132,7 @@ const CreateEmployee = () => {
             id="zipCode"
             name="zipCode"
             onChange={handleChange}
-            value={formData.address.zipCode}
+            value={formData.zipCode}
             required
           />
         </fieldset>
