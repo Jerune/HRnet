@@ -1,9 +1,10 @@
 // @ts-nocheck
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
-import Modal from '../components/Modal'
 import departments from '../data/departments'
 import states from '../data/states'
+// import { EmployeesContext } from '../store'
+import Modal from 'adaptable-react-modal/dist/Modal'
 import getCurrentDay from '../utils/getCurrentDay'
 import getSelectOptions from '../utils/getSelectOptions'
 
@@ -21,6 +22,7 @@ const emptyForm = {
 
 const CreateEmployee = () => {
   const navigate = useNavigate()
+  // const context = useContext(EmployeesContext)
   const [formData, setFormData] = useState(emptyForm)
   const [modalIsActive, setModalIsActive] = useState(false)
 
@@ -35,15 +37,14 @@ const CreateEmployee = () => {
 
   function handleSubmit(event) {
     event.preventDefault()
-    console.log(formData)
+    // addEmployee(formData)
     setModalIsActive(true)
-    setTimeout(() => navigate('/employee-list'), 3000)
   }
 
   return (
     <main className="main">
-      <h2>Create Employee</h2>
-      <form onSubmit={handleSubmit}>
+      <h2 className="title">Create Employee</h2>
+      <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="firstName">First Name</label>
         <input
           type="text"
@@ -91,7 +92,19 @@ const CreateEmployee = () => {
           required
         />
 
-        <fieldset className="address-section">
+        <label htmlFor="department">Department</label>
+        <select
+          name="department"
+          id="department"
+          onChange={handleChange}
+          value={formData.department}
+          required
+        >
+          <option value="">-- Select Dept.--</option>
+          {getSelectOptions(departments)}
+        </select>
+
+        <fieldset>
           <legend>Address</legend>
 
           <label htmlFor="street">Street</label>
@@ -137,20 +150,20 @@ const CreateEmployee = () => {
           />
         </fieldset>
 
-        <label htmlFor="department">Department</label>
-        <select
-          name="department"
-          id="department"
-          onChange={handleChange}
-          value={formData.department}
-          required
-        >
-          <option value="">-- Select Dept.--</option>
-          {getSelectOptions(departments)}
-        </select>
-        <button type="submit">Save</button>
+        <button className="button" type="submit">
+          Save
+        </button>
       </form>
-      {modalIsActive && <Modal />}
+      {modalIsActive && (
+        <Modal
+          title="Employee Added"
+          text="Great news!"
+          animation={true}
+          duration={4000}
+          customFunction={() => navigate('/employee-list')}
+          customClass="custom"
+        />
+      )}
     </main>
   )
 }
