@@ -1,11 +1,12 @@
 // @ts-nocheck
 import Modal from 'adaptable-react-modal/dist/Modal'
 import React, { useContext, useRef, useState } from 'react'
+import DatePicker from 'react-date-picker/dist/entry.nostyle'
 import { useNavigate } from 'react-router'
+import '../css/datepicker.css'
 import departments from '../data/departments'
 import states from '../data/states'
 import { Context } from '../store'
-import getCurrentDay from '../utils/getCurrentDay'
 import getSelectOptions from '../utils/getSelectOptions'
 
 const initialData = {
@@ -53,6 +54,17 @@ const CreateEmployee = () => {
     })
   }
 
+  function handleDatesChange(event, type) {
+    console.log(event, type)
+    const targetName = type
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [targetName]: event,
+      }
+    })
+  }
+
   async function handleSubmit(event) {
     event.preventDefault()
     const isNewEmployee = await checkIfEmployeeAlreadyExists(formData)
@@ -90,30 +102,27 @@ const CreateEmployee = () => {
         />
 
         <label htmlFor="dateOfBirth">Date of Birth</label>
-        <input
-          type="date"
-          id="dateOfBirth"
+        <DatePicker
           name="dateOfBirth"
-          onChange={handleChange}
+          id="dateOfBirth"
+          onChange={(newDate) => handleDatesChange(newDate, 'dateOfBirth')}
           value={formData.dateOfBirth}
-          placeholder="dd/mm/yyyy"
-          min={getCurrentDay().min}
-          max={getCurrentDay().max}
-          pattern="\d{1,2}/\d{1,2}/\d{4}"
-          required
+          clearIcon={null}
+          showLeadingZeros={true}
+          maxDate={new Date()}
+          required={true}
         />
 
         <label htmlFor="startDate">Start Date</label>
-        <input
-          type="date"
-          id="startDate"
+        <DatePicker
           name="startDate"
-          onChange={handleChange}
+          id="startDate"
+          onChange={(newDate) => handleDatesChange(newDate, 'startDate')}
           value={formData.startDate}
-          placeholder="dd/mm/yyyy"
-          min={getCurrentDay().max}
-          pattern="\d{1,2}/\d{1,2}/\d{4}"
-          required
+          clearIcon={null}
+          showLeadingZeros={true}
+          minDate={new Date()}
+          required={true}
         />
 
         <label htmlFor="department">Department</label>
