@@ -1,30 +1,30 @@
-// // @ts-nocheck
-// import React, { createContext, useState } from 'react'
+// @ts-nocheck
+import React, { createContext, useState } from 'react'
 
-// const Context = createContext({})
+const Context = createContext({})
 
-// const EmployeesContext = ({ children }) => {
-//   const [employeeList, setEmployeeList] = useState(['test'])
+const EmployeesContext = ({ children }) => {
+  const [employeeList, setEmployeeList] = useState([])
 
-//   function addEmployee(newEmployee) {
-//     const isNewEmployee = !employeeList.filter(
-//       (employee) => employee.lastName === newEmployee.lastName,
-//     )
-//     if (isNewEmployee) {
-//       setEmployeeList((prevList) => {
-//         return {
-//           ...prevList,
-//           newEmployee,
-//         }
-//       })
-//     }
-//   }
+  function addEmployee(newEmployee) {
+    console.log(newEmployee)
+    const employeeWithSameLastName = employeeList.filter(
+      (employee) => employee.lastName === newEmployee.lastName,
+    )
+    const isNewEmployee = employeeWithSameLastName.length === 0
 
-//   return (
-//     <Context.Provider value={{ employeeList, addEmployee }}>
-//       {children}
-//     </Context.Provider>
-//   )
-// }
+    if (isNewEmployee) {
+      setEmployeeList((prevList) => {
+        return [...prevList, newEmployee]
+      })
+    }
+  }
 
-// export EmployeesContext
+  return (
+    <Context.Provider value={{ employeeList, addEmployee }}>
+      {children}
+    </Context.Provider>
+  )
+}
+
+export { EmployeesContext, Context }

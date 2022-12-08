@@ -1,29 +1,29 @@
 // @ts-nocheck
-import React, { useState } from 'react'
+import Modal from 'adaptable-react-modal/dist/Modal'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router'
 import departments from '../data/departments'
 import states from '../data/states'
-// import { EmployeesContext } from '../store'
-import Modal from 'adaptable-react-modal/dist/Modal'
+import { Context } from '../store'
 import getCurrentDay from '../utils/getCurrentDay'
 import getSelectOptions from '../utils/getSelectOptions'
 
-const emptyForm = {
+const initialData = {
   firstName: '',
   lastName: '',
   dateOfBirth: '',
   startDate: '',
-  department: '',
+  department: 'Sales',
   street: '',
   city: '',
-  state: '',
-  zipCode: '',
+  state: 'Alabama',
+  zipCode: 0,
 }
 
 const CreateEmployee = () => {
   const navigate = useNavigate()
-  // const context = useContext(EmployeesContext)
-  const [formData, setFormData] = useState(emptyForm)
+  const { addEmployee, employeeList } = useContext(Context)
+  const [formData, setFormData] = useState(initialData)
   const [modalIsActive, setModalIsActive] = useState(false)
 
   function handleChange(event) {
@@ -35,11 +35,13 @@ const CreateEmployee = () => {
     })
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
-    // addEmployee(formData)
+    await addEmployee(formData)
     setModalIsActive(true)
   }
+
+  console.log(employeeList)
 
   return (
     <main className="main">
