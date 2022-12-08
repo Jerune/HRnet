@@ -74,7 +74,7 @@ body {
 /* Form */
 
 .title {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 main,
@@ -113,11 +113,24 @@ label {
 }
 
 .button {
-  margin-top: 30px;
   padding: 15px 20px;
+  margin-top: 30px;
   text-transform: uppercase;
   font-size: 1rem;
   background-color: #42b983;
   color: white;
   cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 0.85rem;
+  line-height: 1.5rem;
+  display: none;
+}
+
+.visible {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }

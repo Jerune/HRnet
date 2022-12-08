@@ -1,6 +1,6 @@
 // @ts-nocheck
 import Modal from 'adaptable-react-modal/dist/Modal'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import departments from '../data/departments'
 import states from '../data/states'
@@ -17,16 +17,34 @@ const initialData = {
   street: '',
   city: '',
   state: 'Alabama',
-  zipCode: 0,
+  zipCode: '',
 }
 
 const CreateEmployee = () => {
   const navigate = useNavigate()
-  const { addEmployee, employeeList } = useContext(Context)
+  const errorfield = useRef(null)
+  const { checkIfEmployeeAlreadyExists, addEmployee, employeeList } =
+    useContext(Context)
   const [formData, setFormData] = useState(initialData)
   const [modalIsActive, setModalIsActive] = useState(false)
 
+  function handleErrorMessage(action) {
+    const errorIsShowing = errorfield.current.classList.contains('visible')
+    console.log(action, errorIsShowing)
+    switch (action) {
+      case 'remove':
+        errorIsShowing && errorfield.current.classList.remove('visible')
+        break
+      case 'set':
+        !errorIsShowing && errorfield.current.classList.add('visible')
+        break
+      default:
+        null
+    }
+  }
+
   function handleChange(event) {
+    handleErrorMessage('remove')
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
@@ -37,11 +55,15 @@ const CreateEmployee = () => {
 
   async function handleSubmit(event) {
     event.preventDefault()
-    await addEmployee(formData)
-    setModalIsActive(true)
+    const isNewEmployee = await checkIfEmployeeAlreadyExists(formData)
+    if (isNewEmployee) {
+      await addEmployee(formData)
+      setFormData(initialData)
+      setModalIsActive(true)
+    } else if (!isNewEmployee) {
+      handleErrorMessage('set')
+    }
   }
-
-  console.log(employeeList)
 
   return (
     <main className="main">
@@ -151,17 +173,19 @@ const CreateEmployee = () => {
             required
           />
         </fieldset>
-
         <button className="button" type="submit">
           Save
         </button>
+        <span className="error" ref={errorfield}>
+          Employee already exists, please verify the employee list
+        </span>
       </form>
       {modalIsActive && (
         <Modal
           title="Employee Added"
           text="Great news!"
           animation={true}
-          duration={4000}
+          duration={2000}
           customFunction={() => navigate('/employee-list')}
           customClass="custom"
         />
