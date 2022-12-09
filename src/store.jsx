@@ -2,7 +2,11 @@
 import React, { createContext, useState } from 'react'
 import getCurrentDayAsString from './utils/getCurrentDay'
 
-const Context = createContext({})
+const Context = createContext({
+  employeeList: [],
+  checkIfEmployeeAlreadyExists: () => {},
+  addEmployee: () => {},
+})
 
 const EmployeesContext = ({ children }) => {
   const [employeeList, setEmployeeList] = useState([])

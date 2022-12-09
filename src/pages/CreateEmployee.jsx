@@ -5,28 +5,17 @@ import DatePicker from 'react-date-picker/dist/entry.nostyle'
 import { useNavigate } from 'react-router'
 import '../css/datepicker.css'
 import departments from '../data/departments'
+import { employeeFormData } from '../data/employeeData'
 import states from '../data/states'
 import { Context } from '../store'
 import getSelectOptions from '../utils/getSelectOptions'
-
-const initialData = {
-  firstName: '',
-  lastName: '',
-  dateOfBirth: '',
-  startDate: '',
-  department: 'Sales',
-  street: '',
-  city: '',
-  state: 'Alabama',
-  zipCode: '',
-}
 
 const CreateEmployee = () => {
   const navigate = useNavigate()
   const errorfield = useRef(null)
   const { checkIfEmployeeAlreadyExists, addEmployee, employeeList } =
     useContext(Context)
-  const [formData, setFormData] = useState(initialData)
+  const [formData, setFormData] = useState(employeeFormData)
   const [modalIsActive, setModalIsActive] = useState(false)
 
   function handleErrorMessage(action) {
@@ -67,7 +56,7 @@ const CreateEmployee = () => {
     const isNewEmployee = await checkIfEmployeeAlreadyExists(formData)
     if (isNewEmployee) {
       await addEmployee(formData)
-      setFormData(initialData)
+      setFormData(employeeFormData)
       setModalIsActive(true)
     } else if (!isNewEmployee) {
       handleErrorMessage('set')
