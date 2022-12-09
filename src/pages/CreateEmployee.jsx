@@ -115,6 +115,7 @@ const CreateEmployee = () => {
 
         <label htmlFor="startDate">Start Date</label>
         <DatePicker
+          type="date"
           name="startDate"
           id="startDate"
           onChange={(newDate) => handleDatesChange(newDate, 'startDate')}
@@ -123,6 +124,10 @@ const CreateEmployee = () => {
           showLeadingZeros={true}
           minDate={new Date()}
           required={true}
+          format="dd-MM-yyyy"
+          dayPlaceholder="dd"
+          monthPlaceholder="mm"
+          yearPlaceholder="yyyy"
         />
 
         <label htmlFor="department">Department</label>
