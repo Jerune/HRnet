@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { createContext, useState } from 'react'
+import getCurrentDayAsString from './utils/getCurrentDay'
 
 const Context = createContext({})
 
@@ -15,7 +16,9 @@ const EmployeesContext = ({ children }) => {
     return isNewEmployee
   }
 
-  function addEmployee(newEmployee) {
+  function addEmployee({ startDate, dateOfBirth, ...newEmployee }) {
+    newEmployee.startDate = getCurrentDayAsString(startDate)
+    newEmployee.dateOfBirth = getCurrentDayAsString(dateOfBirth)
     setEmployeeList((prevList) => {
       return [...prevList, newEmployee]
     })

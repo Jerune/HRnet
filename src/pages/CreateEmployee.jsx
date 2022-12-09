@@ -31,7 +31,6 @@ const CreateEmployee = () => {
 
   function handleErrorMessage(action) {
     const errorIsShowing = errorfield.current.classList.contains('visible')
-    console.log(action, errorIsShowing)
     switch (action) {
       case 'remove':
         errorIsShowing && errorfield.current.classList.remove('visible')
@@ -54,13 +53,11 @@ const CreateEmployee = () => {
     })
   }
 
-  function handleDatesChange(event, type) {
-    console.log(event, type)
-    const targetName = type
+  function handleDatesChange(newDate, objKey) {
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
-        [targetName]: event,
+        [objKey]: newDate,
       }
     })
   }
@@ -108,9 +105,12 @@ const CreateEmployee = () => {
           onChange={(newDate) => handleDatesChange(newDate, 'dateOfBirth')}
           value={formData.dateOfBirth}
           clearIcon={null}
-          showLeadingZeros={true}
           maxDate={new Date()}
           required={true}
+          format="dd/MM/yyyy"
+          dayPlaceholder="dd"
+          monthPlaceholder="mm"
+          yearPlaceholder="yyyy"
         />
 
         <label htmlFor="startDate">Start Date</label>
@@ -121,10 +121,9 @@ const CreateEmployee = () => {
           onChange={(newDate) => handleDatesChange(newDate, 'startDate')}
           value={formData.startDate}
           clearIcon={null}
-          showLeadingZeros={true}
           minDate={new Date()}
           required={true}
-          format="dd-MM-yyyy"
+          format="dd/MM/yyyy"
           dayPlaceholder="dd"
           monthPlaceholder="mm"
           yearPlaceholder="yyyy"
