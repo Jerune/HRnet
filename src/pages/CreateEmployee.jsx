@@ -172,6 +172,7 @@ const CreateEmployee = () => {
             name="zipCode"
             onChange={handleChange}
             value={formData.zipCode}
+            pattern="^[0-9]{5}(?:-[0-9]{4})?$"
             required
           />
         </fieldset>

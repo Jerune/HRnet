@@ -7,7 +7,7 @@ export const employeeFormData = {
   street: '',
   city: '',
   state: 'Alabama',
-  zipCode: '',
+  zipCode: 0,
 }
 
 export const employeeTableData = [
@@ -19,5 +19,5 @@ export const employeeTableData = [
   'street',
   'city',
   'state',
-  'zipcode',
+  'zipCode',
 ]
