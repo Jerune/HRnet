@@ -1,18 +1,17 @@
 // @ts-nocheck
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import DataTable from 'react-data-table-component'
-import { mockedEmployees } from '../data/mockedEmployees'
-import { Context } from '../store'
+import useSearch from '../components/SearchEmployees'
 import getTableColumns from '../utils/getTableColumns'
 
 const columns = getTableColumns()
 
 const EmployeeList = () => {
-  const { employeeList } = useContext(Context)
-  const [filteredEmployees, setFilteredEmployees] = useState(mockedEmployees)
+  const [SearchEmployees, filteredEmployees] = useSearch()
 
   return (
     <>
+      <SearchEmployees />
       <DataTable columns={columns} data={filteredEmployees} pagination />
     </>
   )
