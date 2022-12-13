@@ -10,12 +10,11 @@ const useSearch = () => {
   const inputField = useRef(null)
 
   useEffect(() => {
-    async function setFilters() {
-      await filterEmployees()
-      inputField.current.focus()
-    }
+    inputField.current.focus()
+  }, [filteredEmployees])
 
-    setFilters()
+  useEffect(() => {
+    filterEmployees()
   }, [searchFormData])
 
   function handleChange(searchTerm) {
