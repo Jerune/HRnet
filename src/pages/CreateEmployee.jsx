@@ -72,6 +72,7 @@ const CreateEmployee = () => {
           type="text"
           id="firstName"
           name="firstName"
+          placeholder="John"
           onChange={handleChange}
           value={formData.firstName}
           required
@@ -82,6 +83,7 @@ const CreateEmployee = () => {
           type="text"
           id="lastName"
           name="lastName"
+          placeholder="Jackson"
           onChange={handleChange}
           value={formData.lastName}
           required
@@ -138,6 +140,7 @@ const CreateEmployee = () => {
             type="text"
             id="street"
             name="street"
+            placeholder="20 W 34th Street"
             onChange={handleChange}
             value={formData.street}
             required
@@ -148,6 +151,7 @@ const CreateEmployee = () => {
             type="text"
             id="city"
             name="city"
+            placeholder="New York"
             onChange={handleChange}
             value={formData.city}
             required
@@ -167,11 +171,12 @@ const CreateEmployee = () => {
 
           <label htmlFor="zipCode">Zip Code</label>
           <input
-            type="number"
+            type="text"
             id="zipCode"
             name="zipCode"
             onChange={handleChange}
             value={formData.zipCode}
+            placeholder="10001"
             pattern="^[0-9]{5}(?:-[0-9]{4})?$"
             required
           />
