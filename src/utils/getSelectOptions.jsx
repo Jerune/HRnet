@@ -1,21 +1,27 @@
-import React from 'react'
+import departments from '../data/departments'
+import states from '../data/states'
 
-export default function getSelectOptions(optionsArray) {
+export default function getSelectOptions(type) {
   let selectOptions = undefined
-  const arrayHasASingleValue = typeof optionsArray[0] === 'string'
-
-  if (arrayHasASingleValue) {
-    selectOptions = optionsArray.map((option, index) => (
-      <option key={index} value={option}>
-        {option}
-      </option>
-    ))
-  } else {
-    selectOptions = optionsArray.map((option, index) => (
-      <option key={index} value={option.name}>
-        {option.abbreviation}
-      </option>
-    ))
+  switch (type) {
+    case 'departments':
+      selectOptions = departments.map((option) => {
+        return {
+          value: option,
+          label: option,
+        }
+      })
+      break
+    case 'states':
+      selectOptions = states.map((option) => {
+        return {
+          value: option.name,
+          label: option.abbreviation,
+        }
+      })
+      break
+    default:
+      null
   }
 
   return selectOptions

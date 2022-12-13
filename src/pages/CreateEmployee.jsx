@@ -3,20 +3,18 @@ import Modal from 'adaptable-react-modal/dist/Modal'
 import React, { useContext, useRef, useState } from 'react'
 import DatePicker from 'react-date-picker/dist/entry.nostyle'
 import { useNavigate } from 'react-router'
+import Select from 'react-select'
 import '../css/datepicker.css'
-import departments from '../data/departments'
 import { employeeFormData } from '../data/employeeData'
-import states from '../data/states'
 import { Context } from '../store'
 import getSelectOptions from '../utils/getSelectOptions'
 
 const CreateEmployee = () => {
-  const navigate = useNavigate()
-  const errorfield = useRef(null)
-  const { checkIfEmployeeAlreadyExists, addEmployee, employeeList } =
-    useContext(Context)
+  const { checkIfEmployeeAlreadyExists, addEmployee } = useContext(Context)
   const [formData, setFormData] = useState(employeeFormData)
   const [modalIsActive, setModalIsActive] = useState(false)
+  const navigate = useNavigate()
+  const errorfield = useRef(null)
 
   function handleErrorMessage(action) {
     const errorIsShowing = errorfield.current.classList.contains('visible')
@@ -33,6 +31,7 @@ const CreateEmployee = () => {
   }
 
   function handleChange(event) {
+    console.log(event)
     handleErrorMessage('remove')
     setFormData((prevFormData) => {
       return {
@@ -42,7 +41,7 @@ const CreateEmployee = () => {
     })
   }
 
-  function handleDatesChange(newDate, objKey) {
+  function handleDateChange(newDate, objKey = undefined) {
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
@@ -121,16 +120,15 @@ const CreateEmployee = () => {
         />
 
         <label htmlFor="department">Department</label>
-        <select
+        <Select
           name="department"
           id="department"
+          defaultValue="-- Select Dept.--"
           onChange={handleChange}
           value={formData.department}
+          options={getSelectOptions('departments')}
           required
-        >
-          <option value="">-- Select Dept.--</option>
-          {getSelectOptions(departments)}
-        </select>
+        />
 
         <fieldset>
           <legend>Address</legend>
@@ -158,16 +156,15 @@ const CreateEmployee = () => {
           />
 
           <label htmlFor="state">State</label>
-          <select
+          <Select
             name="state"
             id="state"
+            defaultValue="-- Select State --"
             onChange={handleChange}
             value={formData.state}
+            options={getSelectOptions('states')}
             required
-          >
-            <option value="">-- Select State --</option>
-            {getSelectOptions(states)}
-          </select>
+          />
 
           <label htmlFor="zipCode">Zip Code</label>
           <input
