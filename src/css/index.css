@@ -101,8 +101,7 @@ form,
 input,
 select,
 label,
-fieldset,
-button {
+fieldset {
   width: 100%;
   font: inherit;
 }
@@ -130,6 +129,7 @@ label {
 .button {
   padding: 15px 20px;
   margin-top: 30px;
+  width: 100%;
   text-transform: uppercase;
   font-size: 1rem;
   background-color: #42b983;
