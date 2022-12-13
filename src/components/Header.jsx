@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 const Header = () => {
   return (
     <nav className="nav">
-      <h1>HRnet</h1>
+      <h2>HRnet</h2>
       <div className="nav-menu">
         <NavLink className="nav-item" to="/">
           Create Employee

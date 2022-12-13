@@ -65,7 +65,7 @@ const CreateEmployee = () => {
 
   return (
     <main className="main">
-      <h2 className="title">Create Employee</h2>
+      <h1 className="title">Create Employee</h1>
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="firstName">First Name</label>
         <input

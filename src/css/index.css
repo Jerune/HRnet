@@ -23,6 +23,10 @@ body {
   background-color: rgb(247 247 255);
 }
 
+#root > div {
+  width: 100vw;
+}
+
 .main {
   flex: 1;
   display: flex;
@@ -37,14 +41,14 @@ body {
   box-shadow: 15px 20px 30px lightgray;
 }
 
-/* Header */
+/* Headers */
 
 .nav {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 20px;
+  padding: 5px 16px;
   background-color: rgb(87 115 153);
   color: white;
   border-bottom: 2px spolid black;
@@ -71,10 +75,19 @@ body {
   text-decoration: underline;
 }
 
+.employee-list-header {
+  padding: 15px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 /* Form */
 
 .title {
-  margin-bottom: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  align-self: flex-start;
 }
 
 main,
@@ -102,7 +115,8 @@ button {
 }
 
 input,
-select {
+form > select,
+fieldset > select {
   height: 35px;
   margin-bottom: 20px;
   padding-left: 5px;
@@ -134,4 +148,28 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+
+/* Search component */
+
+.search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 300px;
+  gap: 15px;
+}
+
+.search label {
+  width: 50px;
+}
+
+.search label,
+.search input {
+  margin: 0;
+}
+
+.search input::placeholder {
+  font-style: italic;
 }

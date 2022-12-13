@@ -31,7 +31,7 @@ const useSearch = () => {
 
   const SearchEmployee = () => {
     return (
-      <div>
+      <div className="search">
         <label htmlFor="search">Search</label>
         <input
           ref={inputField}
@@ -40,7 +40,7 @@ const useSearch = () => {
           name="search"
           onChange={(event) => handleChange(event.target.value)}
           value={searchFormData}
-          placeholder="Last name"
+          placeholder="on last name"
         />
       </div>
     )
