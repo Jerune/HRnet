@@ -15,80 +15,88 @@ body {
 }
 
 #root {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background-color: rgb(247 247 255);
-}
-
-#root > div {
-  width: 100vw;
+  background-color: #2c7a83;
+  padding-block: 80px;
 }
 
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: 70px 0;
-  padding: 20px 30px 30px;
-  border-radius: 25px;
-  width: 100%;
-  max-width: 650px;
-  background-color: rgb(189 213 234);
-  box-shadow: 15px 20px 30px lightgray;
+  padding: 0 30px 30px;
+  width: 85%;
+  background-color: rgb(255 255 255 / 90%);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 /* Headers */
 
+.logo {
+  height: 70px;
+}
+
 .nav {
   display: flex;
-  width: 100%;
+  width: 85%;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 16px;
-  background-color: rgb(87 115 153);
-  color: white;
+  padding: 20px 30px;
+  background-color: rgb(255 255 255 / 90%);
+  color: black;
   border-bottom: 2px spolid black;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 .nav a {
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: inherit;
 }
 
 .nav-item {
   text-decoration: none;
-  margin-right: 1rem;
+  margin-right: 1.25rem;
   cursor: pointer;
 }
 
 .nav-item.active {
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: underline;
+  color: #2c7a83;
 }
 
 .nav-item:hover {
   text-decoration: underline;
+  color: #2c7a83;
 }
 
-.employee-list-header {
-  padding: 15px 16px;
+/* Title Header */
+
+.title-header {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-bottom: 25px;
+}
+
+.title {
+  margin-top: 10px;
+  margin-bottom: 0;
+  align-self: flex-start;
 }
 
 /* Form */
 
-.title {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  align-self: flex-start;
+svg {
+  stroke: gray;
 }
 
 input,
@@ -100,15 +108,34 @@ fieldset {
   border: 1px solid hsl(0deg 0% 80%);
 }
 
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
 fieldset {
   border: solid 1px gray;
+  padding: 24px 15px;
+}
+
+fieldset > label {
+  padding-left: 5px;
 }
 
 .form {
   display: flex;
-  flex-direction: column;
+  flex-flow: wrap;
+  flex-direction: row;
   justify-content: center;
+  gap: 5%;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
+  width: 47%;
 }
 
 input,
@@ -119,18 +146,22 @@ fieldset > select {
   padding-left: 8px;
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
+.button-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 99%;
 }
 
 .button {
   padding: 15px 20px;
-  margin-top: 30px;
-  width: 100%;
+  margin-top: 15px;
+  width: 180px;
   text-transform: uppercase;
   font-size: 1rem;
   background-color: #42b983;
+  border: none;
+  border-radius: 5px;
   color: white;
   cursor: pointer;
 }
@@ -139,6 +170,7 @@ label {
   color: red;
   font-size: 0.85rem;
   line-height: 1.5rem;
+  padding-top: 10px;
   display: none;
 }
 
@@ -151,21 +183,27 @@ label {
 /* Select Fields */
 
 .react-select-container {
-  width: 100%;
-  margin-bottom: 20px;
+  width: 100% !important;
+  margin-bottom: 20px !important;
 }
 
 .react-select__control {
-  min-height: 40px;
+  min-height: 40px !important;
 }
 
 .react-select__value-container {
-  padding: 0 8px;
+  padding: 0 8px !important;
 }
 
 .react-select__input-container {
-  padding: 0;
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
   margin: 0 !important;
+}
+
+.react-select__indicator-separator,
+.react-select__indicator {
+  color: gray !important;
 }
 
 /* Search component */
@@ -190,4 +228,10 @@ label {
 
 .search input::placeholder {
   font-style: italic;
+}
+
+/* data tables  */
+
+.sc-dmctIk {
+  border-radius: 0 !important;
 }

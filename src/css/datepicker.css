@@ -41,6 +41,7 @@
 .react-date-picker__inputGroup__divider {
   padding: 1px 0;
   white-space: pre;
+  color: gray;
 }
 
 .react-date-picker__inputGroup__input {
@@ -69,7 +70,7 @@
 .react-date-picker__button {
   border: 0;
   background: transparent;
-  padding: 4px 6px;
+  padding: 4px 10px 4px 0;
   max-width: 35px;
 }
 

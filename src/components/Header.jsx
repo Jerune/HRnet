@@ -1,10 +1,14 @@
+// @ts-nocheck
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import logo from '../assets/logo.png'
 
 const Header = () => {
   return (
     <nav className="nav">
-      <h2>HRnet</h2>
+      <NavLink className="nav-item" to="/">
+        <img className="logo" src={logo} alt="HRnet" />
+      </NavLink>
       <div className="nav-menu">
         <NavLink className="nav-item" to="/">
           Create Employee

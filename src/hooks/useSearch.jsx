@@ -6,8 +6,9 @@ import { Context } from '../store'
 const useSearch = () => {
   const { employeeList } = useContext(Context)
   const [searchFormData, setSearchFormData] = useState('')
-  const [filteredEmployees, setFilteredEmployees] = useState(mockedEmployees)
+  const [filteredEmployees, setFilteredEmployees] = useState(employeeList)
   const inputField = useRef(null)
+  const employeeMock = mockedEmployees
 
   useEffect(() => {
     inputField.current.focus()
@@ -22,7 +23,7 @@ const useSearch = () => {
   }
 
   function filterEmployees() {
-    const filteredData = mockedEmployees.filter((employee) =>
+    const filteredData = employeeMock.filter((employee) =>
       employee.lastName.toLowerCase().includes(searchFormData),
     )
 
