@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 html {
   box-sizing: border-box;
 }
@@ -90,20 +91,17 @@ body {
   align-self: flex-start;
 }
 
-main,
 input,
 select,
-button {
-  border: 1px solid gray;
-}
-
-form,
-input,
-select,
-label,
 fieldset {
   width: 100%;
   font: inherit;
+  border-radius: 4px;
+  border: 1px solid hsl(0deg 0% 80%);
+}
+
+fieldset {
+  border: solid 1px gray;
 }
 
 .form {
@@ -116,9 +114,9 @@ fieldset {
 input,
 form > select,
 fieldset > select {
-  height: 35px;
+  height: 40px;
   margin-bottom: 20px;
-  padding-left: 5px;
+  padding-left: 8px;
 }
 
 label {
@@ -148,6 +146,26 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+
+/* Select Fields */
+
+.react-select-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.react-select__control {
+  min-height: 40px;
+}
+
+.react-select__value-container {
+  padding: 0 8px;
+}
+
+.react-select__input-container {
+  padding: 0;
+  margin: 0 !important;
 }
 
 /* Search component */

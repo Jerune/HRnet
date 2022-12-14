@@ -31,7 +31,6 @@ const CreateEmployee = () => {
   }
 
   function handleChange(event) {
-    console.log(event)
     handleErrorMessage('remove')
     setFormData((prevFormData) => {
       return {
@@ -41,13 +40,23 @@ const CreateEmployee = () => {
     })
   }
 
-  function handleDateChange(newDate, objKey = undefined) {
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [objKey]: newDate,
-      }
-    })
+  function handleChangeSelectsAndDates(event, type, name) {
+    handleErrorMessage('remove')
+    if (type === 'date') {
+      setFormData((prevFormData) => {
+        return {
+          ...prevFormData,
+          [name]: event,
+        }
+      })
+    } else if (type === 'select') {
+      setFormData((prevFormData) => {
+        return {
+          ...prevFormData,
+          [name]: event.value,
+        }
+      })
+    }
   }
 
   async function handleSubmit(event) {
@@ -62,6 +71,8 @@ const CreateEmployee = () => {
     }
   }
 
+  console.log(formData)
+
   return (
     <main className="main">
       <h1 className="title">Create Employee</h1>
@@ -69,7 +80,6 @@ const CreateEmployee = () => {
         <label htmlFor="firstName">First Name</label>
         <input
           type="text"
-          id="firstName"
           name="firstName"
           placeholder="John"
           onChange={handleChange}
@@ -80,7 +90,6 @@ const CreateEmployee = () => {
         <label htmlFor="lastName">Last Name</label>
         <input
           type="text"
-          id="lastName"
           name="lastName"
           placeholder="Jackson"
           onChange={handleChange}
@@ -91,8 +100,9 @@ const CreateEmployee = () => {
         <label htmlFor="dateOfBirth">Date of Birth</label>
         <DatePicker
           name="dateOfBirth"
-          id="dateOfBirth"
-          onChange={(newDate) => handleDatesChange(newDate, 'dateOfBirth')}
+          onChange={(event) =>
+            handleChangeSelectsAndDates(event, 'date', 'dateOfBirth')
+          }
           value={formData.dateOfBirth}
           clearIcon={null}
           maxDate={new Date()}
@@ -107,8 +117,9 @@ const CreateEmployee = () => {
         <DatePicker
           type="date"
           name="startDate"
-          id="startDate"
-          onChange={(newDate) => handleDatesChange(newDate, 'startDate')}
+          onChange={(event) =>
+            handleChangeSelectsAndDates(event, 'date', 'startDate')
+          }
           value={formData.startDate}
           clearIcon={null}
           minDate={new Date()}
@@ -121,11 +132,13 @@ const CreateEmployee = () => {
 
         <label htmlFor="department">Department</label>
         <Select
+          className="react-select-container"
+          classNamePrefix="react-select"
           name="department"
-          id="department"
-          defaultValue="-- Select Dept.--"
-          onChange={handleChange}
-          value={formData.department}
+          defaultValue={formData.department}
+          onChange={(event) =>
+            handleChangeSelectsAndDates(event, 'select', 'department')
+          }
           options={getSelectOptions('departments')}
           required
         />
@@ -136,7 +149,6 @@ const CreateEmployee = () => {
           <label htmlFor="street">Street</label>
           <input
             type="text"
-            id="street"
             name="street"
             placeholder="20 W 34th Street"
             onChange={handleChange}
@@ -147,7 +159,6 @@ const CreateEmployee = () => {
           <label htmlFor="city">City</label>
           <input
             type="text"
-            id="city"
             name="city"
             placeholder="New York"
             onChange={handleChange}
@@ -157,11 +168,13 @@ const CreateEmployee = () => {
 
           <label htmlFor="state">State</label>
           <Select
+            className="react-select-container"
+            classNamePrefix="react-select"
             name="state"
-            id="state"
-            defaultValue="-- Select State --"
-            onChange={handleChange}
-            value={formData.state}
+            defaultValue={formData.state}
+            onChange={(event) =>
+              handleChangeSelectsAndDates(event, 'select', 'state')
+            }
             options={getSelectOptions('states')}
             required
           />
@@ -169,7 +182,6 @@ const CreateEmployee = () => {
           <label htmlFor="zipCode">Zip Code</label>
           <input
             type="text"
-            id="zipCode"
             name="zipCode"
             onChange={handleChange}
             value={formData.zipCode}
