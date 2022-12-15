@@ -207,7 +207,7 @@ const CreateEmployee = () => {
             title="Employee Added"
             text="Great news!"
             animation={true}
-            duration={2000}
+            duration={1500}
             customFunction={() => navigate('/employee-list')}
             customClass="custom"
           />
