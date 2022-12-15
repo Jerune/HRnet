@@ -232,3 +232,62 @@ fieldset > select {
 .sc-dmctIk {
   border-radius: 0 !important;
 }
+
+/* Media Queries */
+
+@media screen and (max-width: 1000px) {
+  #root {
+    padding-block: 50px;
+  }
+
+  .form {
+    gap: 0;
+  }
+
+  .form-section {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  #root {
+    padding-block: 25px;
+  }
+
+  .nav,
+  .main {
+    width: 96%;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .nav a {
+    font-size: 1rem;
+  }
+
+  .logo {
+    height: 50px;
+  }
+
+  .search {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .nav-menu {
+    margin-top: 10px;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
