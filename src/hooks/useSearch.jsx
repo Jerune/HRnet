@@ -23,7 +23,7 @@ const useSearch = () => {
   }
 
   function filterEmployees() {
-    const filteredData = employeeMock.filter((employee) =>
+    const filteredData = employeeList.filter((employee) =>
       employee.lastName.toLowerCase().includes(searchFormData),
     )
 
