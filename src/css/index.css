@@ -31,7 +31,7 @@ body {
   flex-direction: column;
   padding: 0 30px 30px;
   width: 85%;
-  background-color: rgb(255 255 255 / 90%);
+  background-color: rgb(255 255 255 / 80%);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 }
